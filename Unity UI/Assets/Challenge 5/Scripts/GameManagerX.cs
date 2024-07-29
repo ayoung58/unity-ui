@@ -9,12 +9,14 @@ public class GameManagerX : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI timerText;
     public GameObject titleScreen;
     public Button restartButton; 
 
     public List<GameObject> targetPrefabs;
 
     private int score;
+    public float gameLength = 60;
     private float spawnRate = 1.5f;
     public bool isGameActive;
 
@@ -49,6 +51,12 @@ public class GameManagerX : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (isGameActive) {
+            UpdateTimer();
+        }
+    }
     // Generate a random spawn position based on a random index from 0 to 3
     Vector3 RandomSpawnPosition()
     {
@@ -71,6 +79,14 @@ public class GameManagerX : MonoBehaviour
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
+    }
+
+    public void UpdateTimer() {
+        gameLength -= Time.deltaTime;
+        timerText.text = "Timer: " + Mathf.Round(gameLength);
+        if (gameLength <= 0) {
+            GameOver();
+        }
     }
 
     // Stop game, bring up game over text and restart button
