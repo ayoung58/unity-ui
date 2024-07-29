@@ -10,7 +10,7 @@ public class Target : MonoBehaviour
     private float maxSpeed = 16;
     private float maxTorque = 10;
     private float xRange = 4;
-    private float ySpawnPos = -2;
+    private float ySpawnPos = -4;
     // This will be set individually in inspector based on the prefab
     public int pointValue;
     
