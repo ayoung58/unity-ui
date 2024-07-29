@@ -10,15 +10,20 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOver;
     public List<GameObject> targets;
     public Button restartButton;
-    public float timeBetweenTargets = 1;
+    public float timeBetweenTargets = 2;
     public TextMeshProUGUI scoreText;
     public bool isGameActive;
     private int score;
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    public void StartGame(int difficulty) {
         isGameActive = true;
         score = 0;
+        timeBetweenTargets /= difficulty;
         StartCoroutine(SpawnTargets());
         UpdateScore(0);
     }
