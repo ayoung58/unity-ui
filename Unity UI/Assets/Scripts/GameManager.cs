@@ -9,12 +9,14 @@ public class GameManager : MonoBehaviour
     public List<GameObject> targets;
     public float timeBetweenTargets = 1;
     public TextMeshProUGUI scoreText;
+    public bool isGameActive;
     private int score;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnTargets());
+        isGameActive = true;
         score = 0;
+        StartCoroutine(SpawnTargets());
         UpdateScore(0);
     }
 
@@ -31,14 +33,14 @@ public class GameManager : MonoBehaviour
 
     public void GameOver() {
         gameOver.gameObject.SetActive(true);
+        isGameActive = false;
     }
 
     IEnumerator SpawnTargets() {
-        while(true) {
+        while(isGameActive) {
             yield return new WaitForSeconds(timeBetweenTargets);
             int index = Random.Range(0, targets.Count);
             Instantiate(targets[index]);
         }
-        
     }
 }
