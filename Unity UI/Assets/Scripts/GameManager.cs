@@ -5,6 +5,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public TextMeshProUGUI gameOver;
     public List<GameObject> targets;
     public float timeBetweenTargets = 1;
     public TextMeshProUGUI scoreText;
@@ -26,6 +27,10 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int scoreToAdd) {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
+    }
+
+    public void GameOver() {
+        gameOver.gameObject.SetActive(true);
     }
 
     IEnumerator SpawnTargets() {
